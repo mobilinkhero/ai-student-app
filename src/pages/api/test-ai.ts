@@ -1,6 +1,6 @@
-export async function GET({ request, locals }) {
-  // Use locals.runtime.env for Cloudflare environment variables, fallback to import.meta.env
-  const env = locals?.runtime?.env ?? import.meta.env;
+import { env } from "cloudflare:workers";
+
+export async function GET({ request }) {
   const apiKey = env.GROQ_API_KEY;
 
   if (!apiKey) {
