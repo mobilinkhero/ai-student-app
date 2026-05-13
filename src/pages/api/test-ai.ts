@@ -2,6 +2,7 @@ import { env } from "cloudflare:workers";
 
 export async function GET({ request }) {
   const apiKey = env.GROQ_API_KEY;
+  const model = env.GROQ_MODEL || "llama-3.1-8b-instant";
 
   if (!apiKey) {
     return new Response(JSON.stringify({ error: "GROQ_API_KEY is not set in environment variables." }), {
@@ -18,7 +19,7 @@ export async function GET({ request }) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192", // Using a smaller model for a quick test
+        model: model, // Dynamically use the model from environment variables
         messages: [
           { role: "user", content: "Hello! This is a test. Please reply only with the phrase 'AI is working!'" }
         ],

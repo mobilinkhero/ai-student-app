@@ -1,9 +1,10 @@
 import { env } from "cloudflare:workers";
 
 export async function GET({ request }) {
-  const apiKey = env.GROQ_API_KEY || "gsk_P19sW9c4tZ5K2y2eB6T2WGdyb3FYoR8A5M7Xj2q2Z5N4b9y3L";
+  const apiKey = env.GROQ_API_KEY;
+  const model = env.GROQ_MODEL || "llama-3.1-8b-instant";
 
-  return new Response(JSON.stringify({ key: apiKey }), {
+  return new Response(JSON.stringify({ key: apiKey, model: model }), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
