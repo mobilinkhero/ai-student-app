@@ -7,21 +7,26 @@ export const GET: APIRoute = async ({ request }) => {
   if (authError) return authError;
 
   const config = {
-    // AdMob IDs
+    // AdMob IDs — update anytime without app release
     ads: {
-      banner: 'ca-app-pub-3940256099942544/9214589741',
+      banner:       'ca-app-pub-3940256099942544/9214589741',
       interstitial: 'ca-app-pub-3940256099942544/1033173712',
-      rewarded: 'ca-app-pub-3940256099942544/5224354917 ',
-      app_open: 'ca-app-pub-3940256099942544/9257395921',
+      rewarded:     'ca-app-pub-3940256099942544/5224354917',
+      app_open:     'ca-app-pub-3940256099942544/9257395921',
     },
-    // Feature Toggles (Enable/Disable features remotely)
+    // In-App Purchase — change subscription ID or price label anytime
+    iap: {
+      subscription_id:   'studymind_pro_monthly',  // must match Play Console product ID
+      display_price:     '$4.99',                  // shown in UI (cosmetic only)
+      display_period:    'month',
+    },
+    // Feature Toggles
     features: {
-      essay_writer: true,
-      mind_map: true,
-      ai_chat: true,
-      premium_gating: true,
+      essay_writer:    true,
+      mind_map:        true,
+      ai_chat:         true,
+      premium_gating:  true,
     },
-    // Versioning
     min_app_version: '1.0.0',
     updated_at: new Date().toISOString(),
   };
